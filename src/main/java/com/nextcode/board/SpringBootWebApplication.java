@@ -1,14 +1,19 @@
 package com.nextcode.board;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 //import org.springframework.web.bind.annotation.GetMapping;
 
 @SpringBootApplication
 public class SpringBootWebApplication extends SpringBootServletInitializer {
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(SpringBootWebApplication.class) ;
@@ -17,4 +22,6 @@ public class SpringBootWebApplication extends SpringBootServletInitializer {
         SpringApplication.run(SpringBootWebApplication.class, args);
 
     }
+
+
 }
