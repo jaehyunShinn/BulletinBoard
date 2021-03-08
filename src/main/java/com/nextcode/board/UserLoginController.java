@@ -20,7 +20,7 @@ public class UserLoginController extends HttpServlet {
     private UserServiceImpl userServiceImpl;
 //결론 login.jsp를 연결할 필용는 없음
     @RequestMapping(value="/loginPost",method= {RequestMethod.POST})
-    public ModelMap loginPost(@RequestBody UserVO loginDTO, HttpServletRequest request, HttpSession httpSession) throws Exception {
+    public String loginPost(@RequestBody UserVO loginDTO, HttpServletRequest request, HttpSession httpSession) throws Exception {
 //        model.addAttribute("loginError", true);
         /*
         1. 세션을 해시테이블에 등록

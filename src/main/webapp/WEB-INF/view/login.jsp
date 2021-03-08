@@ -30,9 +30,19 @@
     var t = document.getElementById('target')
     t.addEventListener('click',function(event){
         alert('Submit button clicked'+event.target.value)
-        $.ajax("/user/loginPost", {"email":$("#email").val() , "password": $("#password").val()}, function(response){
-            console.log(response);    //헤더 바디 url등 model 속성까지
-        }, "json");
+        $.ajax({
+
+            url: "/user/loginPost"
+            , async: false
+            , method: 'POST'
+            , data: JSON.stringify({"email": $('#email').val(), "password": $('#password').val()}),
+            contentType: 'text/plain'
+            , success: function (response) {
+                console.log(response);
+            }
+            ,contentType:"application/json; charset=utf-8"
+            , dataType: "json"
+        })
     })
 
 
