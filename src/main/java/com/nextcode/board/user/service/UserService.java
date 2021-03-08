@@ -1,10 +1,19 @@
 package com.nextcode.board.user.service;
 
 import com.nextcode.board.user.domain.UserVO;
-import org.springframework.stereotype.Service;
 
-@Service
-public interface UserService {
-    void register(UserVO userVO) throws Exception;
-    int login(UserVO userVO) throws Exception;
+public class UserService {
+////todo
+//    int login(SQLSession sqlsession, UserVO userVO) throws Exception {
+//        UserVO userDto;
+//        try {
+//            UserVO userVO = sqlsession.getMapper(user)
+//
+//        }
+//
+//    }
+
+    public int login(UserVO loginDTO) {
+        return 1;
+    }
 }

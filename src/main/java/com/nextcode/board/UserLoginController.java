@@ -1,7 +1,7 @@
 package com.nextcode.board;
 
 import com.nextcode.board.user.domain.UserVO;
-import com.nextcode.board.user.service.UserServiceImpl;
+import com.nextcode.board.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/user")
 public class UserLoginController extends HttpServlet {
     @Autowired
-    private UserServiceImpl userServiceImpl;
+    private UserService userService;
 //결론 login.jsp를 연결할 필용는 없음
     @RequestMapping(value="/loginPost",method= {RequestMethod.POST})
     public String loginPost(@RequestBody UserVO loginDTO, HttpServletRequest request, HttpSession httpSession) throws Exception {
@@ -32,7 +32,7 @@ public class UserLoginController extends HttpServlet {
             if ( loginDTO.getEmail() == null  && loginDTO.getPassword() == null ) {
                 return null;
             } else {
-                int successLoginFlag = userServiceImpl.login(loginDTO);
+                int successLoginFlag = userService.login(loginDTO);
                 if (successLoginFlag == 1 ) {
                     //session을 만들어야 해
     //                httpSession.setAttribute("email",loginDTO.getEmail());
@@ -49,7 +49,7 @@ public class UserLoginController extends HttpServlet {
 //        }
         ModelMap model = new ModelMap();
         model.addAttribute("user",loginDTO);
-        return model;
+        return "index";
     }
 
 // to do
