@@ -1,6 +1,7 @@
 <%@ page import="java.util.Enumeration" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,12 +26,12 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
-
+    var url = "index.jsp"
     // ajax
     var t = document.getElementById('target')
     t.addEventListener('click',function(event){
         alert('Submit button clicked'+event.target.value)
-        $.ajax({
+        var request= $.ajax({
 
             url: "/user/loginPost"
             , async: false
@@ -38,11 +39,27 @@
             , data: JSON.stringify({"email": $('#email').val(), "password": $('#password').val()}),
             contentType: 'text/plain'
             , success: function (response) {
+                if ( $(response.resultcode) ==200 ){
+
+                    window.location.href = url ;
+                } else {
+                    alert(" login not verifed") ;
+                }
                 console.log(response);
             }
             ,contentType:"application/json; charset=utf-8"
             , dataType: "json"
         })
+
+        <%--request.done(function(msg) {--%>
+        <%--    $("#log").html(msg);--%>
+        <%--    <c:redirect url="index"/>--%>
+
+        <%--})--%>
+        request.fail(function(textStatus) {
+            alert("Request failed" +textStatus);
+        })
+
     })
 
 

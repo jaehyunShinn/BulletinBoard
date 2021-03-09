@@ -2,8 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.nextcode.bulletin.user.domain.UserRepository">
+<mapper namespace="com.nextcode.bulletin.user.domain.">
     <select id="getUser" resultType="com.nextcode.bulletin.user.domain.UserVO">
         SELECT * FROM user where id=#{id}
     </select>
+
+    <select id="verifyIsUser" resultType="com.nextcode.bulletin.user.domain.UserVO">
+        SELECT email,username
+        FROM tb_user
+        <where>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(email)">
+
+                AND email =#{email}
+            </if>
+
+
+        </where>
+
+    </select>
+
 </mapper>
