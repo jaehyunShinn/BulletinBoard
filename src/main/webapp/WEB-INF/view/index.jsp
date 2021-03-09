@@ -15,7 +15,7 @@
 
 <div class=" register-box-body">
 
-    <p class="login-box-msg"> 회원가입 페이지</p>
+    <p class="login-box-msg">메인 페이지</p>
     <form action="${path}/user/register" method="post">
         <div class="">
             <input type="text" name="userId" placeholder="아이디">
@@ -39,7 +39,7 @@
 } catch (NullPointerException e) {
 %>
 
-<h1> 설정된 값이 없습니다. </h1>
+
 <%
     }
 %>

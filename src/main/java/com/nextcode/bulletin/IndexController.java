@@ -1,4 +1,4 @@
-package com.nextcode.board;
+package com.nextcode.bulletin;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -25,8 +25,7 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
+    public void login() {
 
-        return "login";
     }
 }

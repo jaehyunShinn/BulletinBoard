@@ -13,13 +13,11 @@ spring:
   mvc:
     view:
       prefix: /WEB-INF/view/
-
       suffix: .jsp
   datasource:
-    url: jdbc:mysql:///192.150.0.18
+    url: jdbc:mysql://192.150.0.18:3306/board
     username: jae
-    password: !jae@board#
+    password: '!jae@board#'
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
-  type-aliases-package: com.nextcode.board
-  mapper-locations: mapper/**/*.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml

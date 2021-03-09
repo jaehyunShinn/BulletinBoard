@@ -1,4 +1,4 @@
-package com.nextcode.board;
+package com.nextcode.bulletin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;

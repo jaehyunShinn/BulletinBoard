@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.nextcode.board.user.domain.UserRepository">
-    <select id="getUser" resultType="com.nextcode.board.user.domain.UserVO">
+<mapper namespace="com.nextcode.bulletin.user.domain.UserRepository">
+    <select id="getUser" resultType="com.nextcode.bulletin.user.domain.UserVO">
         SELECT * FROM user where id=#{id}
     </select>
 </mapper>
