@@ -4,16 +4,16 @@ import com.nextcode.bulletin.user.domain.UserForm;
 import com.nextcode.bulletin.user.domain.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.ui.ModelMap;
 
 @Service
 public class UserService {
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
 
-    public UserVO verifyIsUser(UserForm form) {
-        return userMapper.verifyIsUser(form);
+    public UserVO verifyIsUser(UserForm userForm) {
+
+        return userMapper.verifyIsUser(userForm);
     }
 
 

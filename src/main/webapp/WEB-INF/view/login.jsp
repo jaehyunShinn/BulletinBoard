@@ -26,7 +26,7 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
-    var url = "index.jsp"
+    var urlNew = "index"
     // ajax
     var t = document.getElementById('target')
     t.addEventListener('click',function(event){
@@ -39,17 +39,21 @@
             , data: JSON.stringify({"email": $('#email').val(), "password": $('#password').val()}),
             contentType: 'text/plain'
             , success: function (response) {
-                if ( $(response.resultcode) ==200 ){
+                if ( (response.resultCode) ==200 ){
+//js자체 object니 jqueryx
+                    window.location.href = urlNew ;
 
-                    window.location.href = url ;
                 } else {
-                    alert(" login not verifed") ;
+                    alert(" login not verifed"+response.resultCode) ;
                 }
                 console.log(response);
             }
             ,contentType:"application/json; charset=utf-8"
             , dataType: "json"
         })
+
+
+
 
         <%--request.done(function(msg) {--%>
         <%--    $("#log").html(msg);--%>

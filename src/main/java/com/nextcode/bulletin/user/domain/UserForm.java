@@ -20,5 +20,14 @@ public class UserForm {
     public UserForm setPassword(String password) {
         this.password = password;
         return this;
+
+    }
+
+    @Override
+    public String toString() {
+        return "UserForm{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

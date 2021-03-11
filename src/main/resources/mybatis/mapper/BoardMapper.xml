@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nextcode.bulletin.board.board.Boardmapper">
+    <insert id="postArticle" parameterType="com.nextcode.bulletin.board.domain.ListDTO" useGeneratedKeys="true"
+            keyProperty="seq">
+
+        INSERT INTO tb_board(id,parent_id,grpNum,grpOrd,depth,title,content,createdAt)
+        VALUES (#{id},#{parent_id},#{grpNum},#{grpOrd},#{depth},#{title}.#{content},#{createdAt})
+
+    </insert>
+
+    <select id="getBoardList" resultType="com.nextcode.bulletin.board.BoardVO">
+        SELECT id,parent_id,grpNum,grpOrd,depth,title,content,createdAt
+        FROM tb_board ORDER BY grpNum ASC, grpOrd ASC
+
+    </select>
+
+
+</mapper>

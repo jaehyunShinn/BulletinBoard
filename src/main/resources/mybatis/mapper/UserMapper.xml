@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.nextcode.bulletin.user.domain.">
+<mapper namespace="com.nextcode.bulletin.user.UserMapper">
     <select id="getUser" resultType="com.nextcode.bulletin.user.domain.UserVO">
         SELECT * FROM user where id=#{id}
     </select>
 
     <select id="verifyIsUser" resultType="com.nextcode.bulletin.user.domain.UserVO">
-        SELECT email,username
+        SELECT email,username,password
         FROM tb_user
         <where>
             <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(email)">

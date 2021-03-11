@@ -1,10 +1,14 @@
 package com.nextcode.bulletin;
 
+import com.nextcode.bulletin.user.domain.UserVO;
+import com.sun.media.jfxmedia.logging.Logger;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @EnableAutoConfiguration
@@ -18,9 +22,14 @@ public class IndexController {
 
     //    @GetMapping("/login-error")
     @RequestMapping(value = "/sessionValue", method = RequestMethod.GET)
-    public void test(Map<String, Object> model) {
-
-        model.put("message", "HowToDoInJava Readre!");
+    public void test(Model model, HttpServletRequest request) {
+        UserVO userVO= (UserVO) request.getSession().getAttribute("userInfo");
+        System.out.println(request.getSession());
+        if ( userVO == null ) {
+            System.out.println("not logged in");
+        } else {
+            System.out.println(userVO.toString());
+        }
 
     }
 
@@ -28,4 +37,6 @@ public class IndexController {
     public void login() {
 
     }
+
+
 }
