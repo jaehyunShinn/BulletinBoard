@@ -9,8 +9,9 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
 
-    public BoardVO createBoard(BoardForm boardForm);
-
-    public void deleteBoard(BoardForm boardForm);
-    public List<BoardVO> getBoardList(int seq);
+    public void createBoard(BoardVO boardVO);
+    public void createComment(BoardVO boardVO);
+//    public void deleteBoard(BoardForm boardForm);
+    public List<BoardVO> getBoardList();
+    public BoardVO convertFormToVO(BoardForm boardForm);
 }

@@ -13,5 +13,5 @@ public interface UserMapper {
 
     UserVO verifyIsUser(UserForm userForm);
 
-    List<BoardVO> getBoardList(int seq);
+
 }

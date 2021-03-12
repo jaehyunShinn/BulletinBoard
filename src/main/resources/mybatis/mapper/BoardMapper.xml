@@ -1,20 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.nextcode.bulletin.board.board.Boardmapper">
-    <insert id="postArticle" parameterType="com.nextcode.bulletin.board.domain.ListDTO" useGeneratedKeys="true"
-            keyProperty="seq">
-
-        INSERT INTO tb_board(id,parent_id,grpNum,grpOrd,depth,title,content,createdAt)
-        VALUES (#{id},#{parent_id},#{grpNum},#{grpOrd},#{depth},#{title}.#{content},#{createdAt})
-
+<mapper namespace="com.nextcode.bulletin.board.BoardMapper">
+    <insert id="createBoard">
+        INSERT INTO tb_board (
+            parent_id
+            , grpNum
+            , grpOrd
+            , depth
+            , title
+            , content
+            , createdAt
+            , email
+        )
+        SELECT
+            0 AS parent_id
+            , ifnull(MAX(grpNum),0) + 1 AS grpNum
+            , 0 AS grpOrd
+            , 0 as depth
+            , #{title} as title
+            , #{content} as content
+            , NOW() AS createdAt
+            , #{email} AS email
+        FROM tb_board
     </insert>
 
-    <select id="getBoardList" resultType="com.nextcode.bulletin.board.BoardVO">
-        SELECT id,parent_id,grpNum,grpOrd,depth,title,content,createdAt
-        FROM tb_board ORDER BY grpNum ASC, grpOrd ASC
 
+    <!--
+     <where>
+            <if test="@org.apache.common.lang3.StringUtils@isNotEmpty(title)">
+             AND title=#{title}
+            </if>
+            <if test="@org.apache.common.lang3.StringUtils@isNotEmpty(content)">
+            AND content=#{content}
+            </if>
+        </where>
+    -->
+    <select id="getBoardList" resultType="com.nextcode.bulletin.board.domain.BoardVO">
+        SELECT id,parent_id,grpNum,grpOrd,depth,title,content,email
+        FROM tb_board
+--         /RDER BY grpNum ASC, grpOrd ASC
     </select>
+<!--안쓸 것 같지만 일단 남겨두기-->
+    <select id="convertFormToVO" resultType="com.nextcode.bulletin.board.domain.BoardVO">
+
+            SELECT id,parent_id,grpNum,grpOrd,depth,title,content
+            FROM tb_board
+            <where>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(title)">
+                    AND title =#{title}
+                </if>
+
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(content)">
+                    AND content = #{content}
+                </if>
+            </where>
+    </select>
+    <select id="readBoard">
+        select id,parent_id,grpNum,grpOrd,depth,title,content,
+    </select>
+<!--    <insert id="createComment">-->
+<!--        insert into tb_board(-->
+<!--        id,parent_id,grpNum,grpOrd,depth,title,content,email-->
+
+<!--        ) select-->
+
+<!--            id,parent_id,-->
 
 
+<!--        from tb_board-->
+
+<!--    </insert>-->
 </mapper>

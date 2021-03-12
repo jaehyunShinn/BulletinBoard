@@ -2,21 +2,16 @@ package com.nextcode.bulletin.board;
 
 import com.nextcode.bulletin.board.domain.BoardForm;
 import com.nextcode.bulletin.board.domain.BoardVO;
-import com.nextcode.bulletin.board.domain.ListDTO;
-import com.nextcode.bulletin.user.UserService;
-import org.apache.ibatis.annotations.Param;
+import com.nextcode.bulletin.user.domain.UserVO;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.ws.Response;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @Controller
 @RequestMapping("/board")
@@ -25,34 +20,47 @@ public class BoardController {
     private BoardService boardService;
 
     @ResponseBody
-    @RequestMapping(value="/boardPost/{seq}", method= {RequestMethod.POST})
-    public ModelMap boardPost(@RequestBody BoardForm boardForm, HttpServletRequest request) {
-         ModelMap map=new ModelMap();
-         if (boardForm.getTitle() == null && boardForm.getContent()==null ) {
-             map.addAttribute("errorCode",400);
-         } else {
-//             map.addAttribute();
+    @RequestMapping(value="/boardPost", method= {RequestMethod.POST})
+    public ModelMap boardPost(@RequestBody BoardVO boardVO, HttpServletRequest request) {
+//        BoardVO boardVO = convertFormToVO(boardForm);
+        UserVO userVO = getSession(request);
+        ModelMap map=new ModelMap();
+         if (boardVO.getTitle() == null && boardVO.getContent()==null ) {
+             map.addAttribute("resultCode",400);
+             return map;
          }
-//         BoardVO boardVO = getBoardVO(boardForm);
-//         ModelVO modelVO =
+
+        map.addAttribute("resultCode", 200);
+         //todo 글 작성 로직 처리
+        System.out.println("이메일 확인"+userVO.getEmail());
+        boardVO.setEmail(userVO.getEmail());
+        boardService.postArticle(boardVO);
         return map;
-
     }
-
-//    private BoardVO postBoard(BoardForm boardForm) {
-//        return boardService.postArticle(boardForm);
-//    }
-
-//    private BoardVO getBoardVO(BoardForm boardForm) {
-//
-//    }
-
 
     @RequestMapping(value="/boardList", method={RequestMethod.GET})
-    public void getBoardList(ListDTO param , HttpServletRequest request) {
-
-//        Map<String,Object> map =new HashMap<String,Object>();
-//        map.put("param1",request.getParameter("param1"));
-//        map.put("")
+    public void getBoardList(Model model, HttpServletRequest request) {
+        getSession(request);
+        List<BoardVO> boardList = boardService.getBoardList();
+        model.addAttribute("boardList",boardList);
     }
+
+    private UserVO getSession(HttpServletRequest request){
+        UserVO userVO= (UserVO) request.getSession().getAttribute("userInfo");
+        if ( userVO== null)
+        {
+            throw new IllegalStateException("login 되지 않았습니다");
+        }
+        return userVO;
+    }
+
+    @RequestMapping(value="/registerBoard",method={RequestMethod.GET})
+    public void registerBoard(HttpServletRequest request){
+        getSession(request);
+    }
+    @RequestMapping(value="/registerComment",method={RequestMethod.POST})
+    private BoardVO convertFormToVO(BoardForm boardForm) {
+        return boardService.convertFormToVO(boardForm);
+    }
+
 }

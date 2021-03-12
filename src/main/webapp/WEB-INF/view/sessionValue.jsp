@@ -20,13 +20,6 @@
 //        application.setAttribute("value", 2);
 //        session.setAttribute("value",3);
 
-<%--%>--%>
-<%--<h1>--%>
-<%--        name으로 입력한 값은--%>
-<%--    <%=name %>--%>
-<%--        ${name}--%>
-<%--</h1>--%>
-<%--${value}--%>
 
 
 </body>

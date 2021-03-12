@@ -12,7 +12,7 @@
             , CRT_ID
         FROM TB_SAMPLE
         <where>
-            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(id)">
+            <if test="@org.apache.common.lang3.StringUtils@isNotEmpty(id)">
                 AND ID = #{id}
             </if>
             <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(name)">

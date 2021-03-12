@@ -32,7 +32,6 @@
     t.addEventListener('click',function(event){
         alert('Submit button clicked'+event.target.value)
         var request= $.ajax({
-
             url: "/user/loginPost"
             , async: false
             , method: 'POST'
