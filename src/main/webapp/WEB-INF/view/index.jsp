@@ -47,7 +47,7 @@ request.setCharacterEncoding("UTF-8");>
 
     $('#boardPageBtn').click(function () {
 
-        location.href = "/board";
+        location.href = "/board/boardList";
     })
 
 

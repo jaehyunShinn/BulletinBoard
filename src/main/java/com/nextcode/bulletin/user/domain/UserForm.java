@@ -14,6 +14,7 @@ public class UserForm {
     }
 
     public String getPassword() {
+
         return password == null ? null : password.trim();
     }
 

@@ -23,7 +23,5 @@ public class SampleController {
         List<SampleDto> sampleList = sampleService.getSampleList(form);
 
         model.addAttribute("list", sampleList);
-
-
     }
 }

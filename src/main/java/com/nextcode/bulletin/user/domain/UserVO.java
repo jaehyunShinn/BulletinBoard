@@ -3,6 +3,7 @@ package com.nextcode.bulletin.user.domain;
 import org.springframework.context.annotation.Scope;
 
 import java.io.Serializable;
+
 @Scope("sesssion")
 public class UserVO implements Serializable {
     private static final long E = -5292057038102685449L;

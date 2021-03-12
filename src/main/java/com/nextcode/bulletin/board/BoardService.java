@@ -12,19 +12,21 @@ public class BoardService {
     @Autowired
     private BoardMapper boardMapper;
 
-
-//    public BoardVO createBoard(BoardForm boardForm) {
+//    public void createComment(BoardVO boardVO) {
 //
-//        return boardMapper.createBoard(boardForm);
+//        return boardMapper.createComment(boardVO);
 //
 //    }
-    public BoardVO postArticle(BoardForm boardForm) {
 
-        return boardMapper.createBoard(boardForm);
+    public void postArticle(BoardVO boardVO) {
+        boardMapper.createBoard(boardVO);
     }
 
-    public List<BoardVO> getBoardList(int seq) {
-        return boardMapper.getBoardList(seq);
+    public List<BoardVO> getBoardList() {
+        return boardMapper.getBoardList();
+    }
 
+    public BoardVO convertFormToVO(BoardForm boardForm) {
+        return boardMapper.convertFormToVO(boardForm);
     }
 }

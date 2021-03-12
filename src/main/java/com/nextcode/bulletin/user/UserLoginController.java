@@ -1,5 +1,6 @@
 package com.nextcode.bulletin.user;
 
+import com.nextcode.bulletin.board.domain.BoardVO;
 import com.nextcode.bulletin.sample.domain.SampleDto;
 import com.nextcode.bulletin.sample.domain.SampleForm;
 import com.nextcode.bulletin.user.domain.UserForm;
@@ -73,12 +74,8 @@ public class UserLoginController {
 
 //    @RequestMapping("/user")
 //    public void getUser(UserForm form, HttpServletRequest request, Model model){
-//
 //        List<UserVO> userList = userService.verifyIsUser(form) ;
-//
 //        model.addAttribute("list", userList);
-//
-//
 //    }
 
 }
