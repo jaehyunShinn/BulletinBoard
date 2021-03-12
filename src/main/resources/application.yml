@@ -1,0 +1,23 @@
+server:
+  port: 9051
+
+spring:
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+  session:
+    jdbc:
+      table-name: "SESSIONS"
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp
+  datasource:
+    url: jdbc:mysql://192.150.0.18:3306/board
+    username: jae
+    password: '!jae@board#'
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml

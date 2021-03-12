@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nextcode.bulletin.sample.SampleMapper">
+
+    <select id="getSampleList" resultType="com.nextcode.bulletin.sample.domain.SampleDto">
+        SELECT ID
+            , NAME
+            , AGE
+            , NOTICE
+            , DATE_FORMAT(CRT_DATE, '%Y-%m-%d %H:%i:%s') AS CRT_DATE
+            , CRT_ID
+        FROM TB_SAMPLE
+        <where>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(id)">
+                AND ID = #{id}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(name)">
+                AND NAME LIKE CONCAT(#{name},'%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(age)">
+                AND AGE = #{age}
+            </if>
+        </where>
+    </select>
+
+    <insert id="registerSample">
+        INSERT INTO TB_SAMPLE (
+            ID
+            , NAME
+            , AGE
+            , NOTICE
+            , CRT_DATE
+            , CRT_ID
+        ) VALUES (
+            #{id}
+            , #{name}
+            , #{age}
+            , #{notice}
+            , NOW()
+            , #{crt_id}
+        )
+    </insert>
+
+    <update id="modifySample">
+        UPDATE TB_SAMPLE
+            NAME = #{name}
+            , AGE = #{age}
+            , NOTICE = #{notice}
+            , CRT_DATE = NOW()
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="removeSample">
+        DELETE FROM tb_sample
+        WHERE ID = #{id}
+    </delete>
+</mapper>
