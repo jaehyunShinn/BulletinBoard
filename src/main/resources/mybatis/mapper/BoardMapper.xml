@@ -56,9 +56,12 @@
                 </if>
             </where>
     </select>
-    <select id="readBoard">
-        select id,parent_id,grpNum,grpOrd,depth,title,content,
+    <select id="getBoardDetail" resultType="com.nextcode.bulletin.board.domain.BoardVO">
+        select id,parent_id,grpNum,grpOrd,depth,title,content
+        from tb_board
+        where id = #{id}
     </select>
+
 <!--    <insert id="createComment">-->
 <!--        insert into tb_board(-->
 <!--        id,parent_id,grpNum,grpOrd,depth,title,content,email-->
@@ -71,4 +74,18 @@
 <!--        from tb_board-->
 
 <!--    </insert>-->
+    <insert id="createComment">
+          INSERT INTO tb_board (
+            parent_id
+            , grpNum
+            , grpOrd
+            , depth
+            , title
+            , content
+            , createdAt
+            , email
+        ) SELECT
+        #{id} as parent_id,
+
+    </insert>
 </mapper>

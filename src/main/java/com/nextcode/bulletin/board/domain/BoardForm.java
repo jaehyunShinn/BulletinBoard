@@ -1,15 +1,11 @@
 package com.nextcode.bulletin.board.domain;
 
 public class BoardForm {
+    public String id;
     public String title;
     public String content;
 
-    public BoardForm(String title, String content) {
-        this.title = title;
-        this.content = content;
-    }
-
-    public String getTitle() {
+     public String getTitle() {
         return title;
     }
 
@@ -25,10 +21,19 @@ public class BoardForm {
         this.content = content;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "BoardForm{" +
-                "title='" + title + '\'' +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 '}';
     }

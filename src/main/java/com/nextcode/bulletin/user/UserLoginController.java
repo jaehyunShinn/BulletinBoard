@@ -55,7 +55,6 @@ public class UserLoginController {
                 userVO.setPassword(null);
                 //session 등록 전에
                 request.getSession().setAttribute("userInfo", userVO);
-
             } else {
                 //비밀번호가 틀렸음
                 model.addAttribute("resultCode", 410);
@@ -66,12 +65,9 @@ public class UserLoginController {
         }
         return model;
     }
-
     private UserVO fetchUser(UserForm userForm) {
-
         return userService.verifyIsUser(userForm);
     }
-
 //    @RequestMapping("/user")
 //    public void getUser(UserForm form, HttpServletRequest request, Model model){
 //        List<UserVO> userList = userService.verifyIsUser(form) ;

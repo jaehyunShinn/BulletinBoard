@@ -14,17 +14,6 @@ public class BoardVO {
 
     private String email;
 
-    public BoardVO(int id, int parent_id, int grpNum, int grpOrd, int depth, String title, String content, String email) {
-        this.id = id;
-        this.parent_id = parent_id;
-        this.grpNum = grpNum;
-        this.grpOrd = grpOrd;
-        this.depth = depth;
-        this.title = title;
-        this.content = content;
-        this.email = email;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -87,5 +76,19 @@ public class BoardVO {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "BoardVO{" +
+                "id=" + id +
+                ", parent_id=" + parent_id +
+                ", grpNum=" + grpNum +
+                ", grpOrd=" + grpOrd +
+                ", depth=" + depth +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

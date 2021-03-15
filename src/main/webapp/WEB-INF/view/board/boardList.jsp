@@ -11,71 +11,41 @@
 <h1> 게시판 목록 </h1>
 
 
-<table id ="tableId" border =1 >
-        <th>1st seq</th>
-        <th> 2nd 게시글 아이디</th>
-        <th>3rd 부모 게시글 아이디</th>
-        <th>4th 게시물 그룹 </th>
-        <th>5th 그룹 내 순서</th>
-        <th>6th 제목</th>
-        <th>7th 내용</th>
-<%--참고 링크 https://rwd337.tistory.com/164--%>
+<table id="tableId" border=1>
+    <th>1st seq</th>
+    <th> 2nd 게시글 아이디</th>
+    <th>3rd 부모 게시글 아이디</th>
+    <th>4th 게시물 그룹</th>
+    <th>5th 그룹 내 순서</th>
+    <th>6th 제목</th>
+    <th>7th 내용</th>
+    <%--참고 링크 https://rwd337.tistory.com/164--%>
     <tbody class="text-center">
-    <c:forEach items="${boardList}" var="boardList" varStatus="k" >
-        var   = boardList.parent_id;
-        var grpNum = boardList.grpNum;
-        var grpOrd = boardList.grpOrd;
-        var depth = boardList.depth;
-        <tr> <a href="registerComment.jsp?idx=<%=parent_id%>"><%=title %>
+    <c:forEach items="${boardList}" var="board" varStatus="k">
+        <tr onclick="goView('${board.id}')">
 
             <td>1st ${k.count} /${k.index} </td>
             <td>
-                2nd${boardList.id}
+                2nd${board.id}
             </td>
-               <td>3rd ${boardList.parent_id}    </td>
-               <td>4th ${boardList.grpNum}</td>
-               <td>5th ${boardList.grpOrd}</td>
-               <td>6th ${boardList.title}</td>
-               <td>7th ${boardList.content}</td>
+            <td>3rd ${board.parent_id}</td>
+            <td>4th ${board.grpNum}</td>
+            <td>5th ${board.grpOrd}</td>
+            <td>6th ${board.title}</td>
+            <td>7th ${board.content}</td>
         </tr>
     </c:forEach>
 
     </tbody>
 </table>
+<form>
+
+    <input type="hidden" id="form-control" boardInfo="boardInfo" />
+</form>
 </body>
 <script>
-
-    function addRowHandler() {
-
-        var table = document.getElementById('tableId');
-        var rows = table.getElementsByTagName("tr");
-        for (i = 0; i < rows.length; i++) {
-
-                var currentRow = table.rows[i];
-                // var createClickHandler = function (row) {
-                //     return function () {
-                //         var cell = row.getElementsByTagName("td")[0];
-                //         var id = cell.innerHTML;
-                //
-                //         var cell1 = row.getElementsByTagName("td")[1];
-                //         var id2 = cell1.innerHTML;
-                //
-                //         conosle.log(cell, cell1);
-                //     };
-                // };
-                var createClickHandler = function(row) {
-                    return function() {
-                        var cell = row.getElementsByTagName("td")[0];
-                        // check if not null
-                        if(!cell) return; // no errors!
-                        var id = cell.innerHTML;
-                        alert("id:" + id);
-                    };
-                };
-                currentRow.onclick = createClickHandler(currentRow);
-        }
+    function goView(id){
+        document.location.href="boardDetail?id="+id;
     }
-
-    window.onload = addRowHandler();
 </script>
 </html>

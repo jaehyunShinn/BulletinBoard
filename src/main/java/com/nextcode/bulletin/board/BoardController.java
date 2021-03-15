@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.activation.CommandMap;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -63,4 +65,18 @@ public class BoardController {
         return boardService.convertFormToVO(boardForm);
     }
 
+    //상세보기 페이지
+    @RequestMapping(value="/boardDetail",method = {RequestMethod.GET})
+    private void getBoardDetail(Model map,HttpServletRequest request,BoardForm form) {
+        getSession(request);
+        BoardVO boardDetail = boardService.getBoardDetail(form);
+        map.addAttribute("boardDetail",boardDetail);
+    }
+    @RequestMapping(value="/registerComment", method= {RequestMethod.POST})
+    private void registerComment(Model map,HttpServletRequest request, BoardForm form) {
+
+        getSession(request);
+
+        BoardVO commentDetail = boardService.postComment(form);
+    }
 }
