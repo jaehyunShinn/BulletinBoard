@@ -11,7 +11,7 @@
 <h1> 게시판 목록 </h1>
 
 
-<table>
+<table id ="tableId" border =1 >
         <th>1st seq</th>
         <th> 2nd 게시글 아이디</th>
         <th>3rd 부모 게시글 아이디</th>
@@ -21,8 +21,13 @@
         <th>7th 내용</th>
 <%--참고 링크 https://rwd337.tistory.com/164--%>
     <tbody class="text-center">
-    <c:forEach items="${boardList}" var="boardList" varStatus="k">
-        <tr>
+    <c:forEach items="${boardList}" var="boardList" varStatus="k" >
+        var   = boardList.parent_id;
+        var grpNum = boardList.grpNum;
+        var grpOrd = boardList.grpOrd;
+        var depth = boardList.depth;
+        <tr> <a href="registerComment.jsp?idx=<%=parent_id%>"><%=title %>
+
             <td>1st ${k.count} /${k.index} </td>
             <td>
                 2nd${boardList.id}
@@ -34,11 +39,43 @@
                <td>7th ${boardList.content}</td>
         </tr>
     </c:forEach>
-    <c:if test="${boardList.depth == 0}">
-        <c:if test="${boardList.}"
-    </c:if>
 
     </tbody>
 </table>
 </body>
+<script>
+
+    function addRowHandler() {
+
+        var table = document.getElementById('tableId');
+        var rows = table.getElementsByTagName("tr");
+        for (i = 0; i < rows.length; i++) {
+
+                var currentRow = table.rows[i];
+                // var createClickHandler = function (row) {
+                //     return function () {
+                //         var cell = row.getElementsByTagName("td")[0];
+                //         var id = cell.innerHTML;
+                //
+                //         var cell1 = row.getElementsByTagName("td")[1];
+                //         var id2 = cell1.innerHTML;
+                //
+                //         conosle.log(cell, cell1);
+                //     };
+                // };
+                var createClickHandler = function(row) {
+                    return function() {
+                        var cell = row.getElementsByTagName("td")[0];
+                        // check if not null
+                        if(!cell) return; // no errors!
+                        var id = cell.innerHTML;
+                        alert("id:" + id);
+                    };
+                };
+                currentRow.onclick = createClickHandler(currentRow);
+        }
+    }
+
+    window.onload = addRowHandler();
+</script>
 </html>

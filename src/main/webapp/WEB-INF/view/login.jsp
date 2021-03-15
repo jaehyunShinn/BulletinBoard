@@ -35,8 +35,8 @@
             url: "/user/loginPost"
             , async: false
             , method: 'POST'
-            , data: JSON.stringify({"email": $('#email').val(), "password": $('#password').val()}),
-            contentType: 'text/plain'
+            , data: JSON.stringify({"email": $('#email').val(), "password": $('#password').val()})
+
             , success: function (response) {
                 if ( (response.resultCode) ==200 ){
 //js자체 object니 jqueryx
