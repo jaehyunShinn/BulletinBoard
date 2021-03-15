@@ -29,14 +29,12 @@
     var t = document.getElementById('registerCommentButton')
     t.addEventListener('click', function (event) {
         var request = $.ajax({
-
             url: "/board/registerSub", async: false, method: 'POST',
             data: JSON.stringify({}),
             success: function (response) {
                 if ((response.resultCode) == 200) {
 //js자체 object니 jqueryx
                     // window.location.href = urlNew ;
-
                 } else {
                     alert(" login not verifed" + response.resultCode);
                 }

@@ -73,10 +73,12 @@ public class BoardController {
         map.addAttribute("boardDetail",boardDetail);
     }
     @RequestMapping(value="/registerComment", method= {RequestMethod.POST})
-    private void registerComment(Model map,HttpServletRequest request, BoardForm form) {
-
+    private void registerComment(HttpServletRequest request, BoardForm form) {
+        //resultcode만 보내면 돼
         getSession(request);
-
-        BoardVO commentDetail = boardService.postComment(form);
+        ModelMap modelMap= new ModelMap();
+        BoardVO boardDetail =  boardService.getBoardDetail(form);
+        modelMap.addAttribute("boardDetailinComment",boardDetail);
+        boardService.postComment(boardDetail);
     }
 }

@@ -84,8 +84,16 @@
             , content
             , createdAt
             , email
-        ) SELECT
-        #{id} as parent_id,
+        )   SELECT
+            0 AS parent_id
+            , ifnull(MAX(grpNum),0) + 1 AS grpNum
+            , #{grpOrd} AS grpOrd
+            , 0 as depth
+            , #{title} as title
+            , #{content} as content
+            , NOW() AS createdAt
+            , #{email} AS email
+        FROM tb_board
 
     </insert>
 </mapper>

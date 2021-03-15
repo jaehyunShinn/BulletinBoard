@@ -39,7 +39,7 @@ public class BoardService {
         System.out.println("dto="+dto.toString());
         return dto;
     }
-    public void postComment(BoardForm form) {
-        boardMapper.createComment(form);
+    public void postComment(BoardVO boardDetail) {
+        boardMapper.createComment(boardDetail);
     }
 }
