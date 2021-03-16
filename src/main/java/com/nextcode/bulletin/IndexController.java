@@ -1,7 +1,6 @@
 package com.nextcode.bulletin;
 
 import com.nextcode.bulletin.user.domain.UserVO;
-import com.sun.media.jfxmedia.logging.Logger;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -39,7 +39,7 @@
     <select id="getBoardList" resultType="com.nextcode.bulletin.board.domain.BoardVO">
         SELECT id,parent_id,grpNum,grpOrd,depth,title,content,email
         FROM tb_board
---         /RDER BY grpNum ASC, grpOrd ASC
+        ORDER BY grpNum ASC, grpOrd ASC
     </select>
 
     <select id="getBoardDetail" resultType="com.nextcode.bulletin.board.domain.BoardVO">

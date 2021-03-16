@@ -5,47 +5,55 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title> I</title>
-
+    <style>
+        #tableId tr td {
+            width:60px;
+        }
+    </style>
 
 </head>
 <h1> 게시판 목록 </h1>
 
+<div style="width:900px">
+    <table id="tableId" border=1 style="width:100%">
+        <th>아이디</th>
+        <th>부모 아이디</th>
+        <th>그룹</th>
+        <th>그룹 내 순서</th>
+        <th>depth</th>
+        <th style="width:500px;">제목</th>
+        <%--참고 링크 https://rwd337.tistory.com/164--%>
+        <tbody class="text-center">
+        <c:forEach items="${boardList}" var="board" varStatus="k">
+            <tr onclick="goView('${board.id}')">
+                <td>
+                    ${board.id}
+                </td>
+                <td>${board.parent_id}</td>
+                <td>${board.grpNum}</td>
+                <td>${board.grpOrd}</td>
+                <td>${board.depth}</td>
+                <td>
+                    <c:forEach begin="1" end="${board.depth}">&nbsp;&nbsp;&nbsp;&nbsp;</c:forEach>
+                    ${board.title}
+                </td>
+            </tr>
+        </c:forEach>
 
-<table id="tableId" border=1>
-    <th>1st seq</th>
-    <th> 2nd 게시글 아이디</th>
-    <th>3rd 부모 게시글 아이디</th>
-    <th>4th 게시물 그룹</th>
-    <th>5th 그룹 내 순서</th>
-    <th>6th 제목</th>
-    <th>7th 내용</th>
-    <%--참고 링크 https://rwd337.tistory.com/164--%>
-    <tbody class="text-center">
-    <c:forEach items="${boardList}" var="board" varStatus="k">
-        <tr onclick="goView('${board.id}')">
-
-            <td>1st ${k.count} /${k.index} </td>
-            <td>
-                2nd${board.id}
-            </td>
-            <td>3rd ${board.parent_id}</td>
-            <td>4th ${board.grpNum}</td>
-            <td>5th ${board.grpOrd}</td>
-            <td>6th ${board.title}</td>
-            <td>7th ${board.content}</td>
-        </tr>
-    </c:forEach>
-
-    </tbody>
-</table>
-<form>
-
-    <input type="hidden" id="form-control" boardInfo="boardInfo" />
-</form>
+        </tbody>
+    </table>
+    <div style="text-align: right; padding-top: 10px;">
+        <button type="button" onclick="goRegister()">글쓰기</button>
+    </div>
+</div>
 </body>
 <script>
-    function goView(id){
-        document.location.href="boardDetail?id="+id;
+    function goView(id) {
+        document.location.href = "boardDetail?id=" + id;
+    }
+
+    function goRegister(){
+        document.location.href = "registerBoard";
     }
 </script>
 </html>

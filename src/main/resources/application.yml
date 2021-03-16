@@ -15,7 +15,7 @@ spring:
       prefix: /WEB-INF/view/
       suffix: .jsp
   datasource:
-    url: jdbc:mysql://192.150.0.18:3306/board
+    url: jdbc:mysql://192.150.0.18:3306/board?useUnicode=true&characterEncoding=utf8
     username: jae
     password: '!jae@board#'
     driver-class-name: com.mysql.cj.jdbc.Driver

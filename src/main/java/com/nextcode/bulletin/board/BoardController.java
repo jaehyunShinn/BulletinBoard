@@ -4,6 +4,8 @@ import com.nextcode.bulletin.board.domain.BoardForm;
 import com.nextcode.bulletin.board.domain.BoardVO;
 import com.nextcode.bulletin.user.domain.UserVO;
 import org.apache.catalina.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/board")
 public class BoardController {
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private BoardService boardService;
 
@@ -69,24 +73,23 @@ public class BoardController {
         map.addAttribute("boardDetail", boardDetail);
     }
 
-    @RequestMapping(value = "/registerSub", method = {RequestMethod.POST})
-    private void registerSub(HttpServletRequest request, BoardForm form) {
-        //resultcode만 보내면 돼
+    @RequestMapping(value = "/registerSub", method = {RequestMethod.GET})
+    public void registerSub(Model map, HttpServletRequest request, BoardForm form) {
         getSession(request);
-        ModelMap modelMap = new ModelMap();
-        BoardVO boardDetail = boardService.getBoardDetail(form);
-        modelMap.addAttribute("boardDetailinComment", boardDetail);
-        boardService.postComment(boardDetail);
     }
+
     @ResponseBody
-    @RequestMapping(value = "/subPost",method={RequestMethod.POST})
+    @RequestMapping(value = "/subPost", method = {RequestMethod.POST})
     public ModelMap subPost(@RequestBody BoardVO boardVO, HttpServletRequest request) {
-            UserVO userVO = getSession(request);
-            ModelMap map = new ModelMap();
-            if (boardVO.getTitle() == null && boardVO.getContent() == null) {
-                map.addAttribute("resultCode", 400);
-                return map;
-            }
+        UserVO userVO = getSession(request);
+
+        log.info("this is subPost");
+
+        ModelMap map = new ModelMap();
+        if (boardVO.getTitle() == null && boardVO.getContent() == null) {
+            map.addAttribute("resultCode", 400);
+            return map;
+        }
         map.addAttribute("resultCode", 200);
         boardVO.setEmail(userVO.getEmail());
         boardService.postComment(boardVO);

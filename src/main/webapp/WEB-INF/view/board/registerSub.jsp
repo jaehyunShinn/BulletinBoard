@@ -5,45 +5,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    글쓰기 페이지
+
+    답글쓰기 페이지
 </head>
 <body>
-<h1>Login</h1>
-<form action="registerSub" method="post">
-    <div type="text" placeholder="Title" required="" id="title" name="title"
-         style="width:700px;height:100px;font-size:20px;"/>
+<form action="boardPost" method="post">
+    <h1>Login</h1>
+    <input type="text" placeholder="Title" required="" id="title" name="title"
+           style="width:700px;height:100px;font-size:20px;"/>
     </br>
-    <div type="text" placeholder="Content" required="" id="content" name="content"
-         style="width:800px;height:500px;font-size:15px;"/>
+    <input type="text" placeholder="Content" required="" id="content" name="content"
+           style="width:800px;height:500px;font-size:15px;"/>
     <div>
-        <input type="button" id="registerCommentButton" value="답글등록">
+        <input type="button" id="registerReplyButton" value="답글쓰기"/>
     </div>
 </form>
-
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
         crossorigin="anonymous"></script>
 <script>
-    var t = document.getElementById('registerCommentButton')
+    var urlboardPost = "boardList"
+
+    var t = document.getElementById('registerReplyButton')
     t.addEventListener('click', function (event) {
         var request = $.ajax({
-            url: "/board/subPost", async: false, method: 'POST',
-            data: JSON.stringify({ }),
+            url: "subPost",
+            async: false,
+            method: 'POST',
+            data: JSON.stringify({
+                "title": $('#title').val(), 'content': $('#content').val()
+            }),
             success: function (response) {
                 if ((response.resultCode) == 200) {
-                    //js자체 object니 jqueryx
-                    // window.location.href = urlNew ;
+//js자체 object니 jqueryx
+                    window.location.href = urlNew;
                 } else {
                     alert(" login not verifed" + response.resultCode);
                 }
                 console.log(response);
             },
             contentType: "application/json; charset=utf-8",
-            dataType: "json"
+            dataType: "json",
         })
     })
-
 </script>
-
-
-
+</html>
