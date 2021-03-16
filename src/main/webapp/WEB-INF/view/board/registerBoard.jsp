@@ -32,13 +32,13 @@
         var request = $.ajax({
             url: "/board/boardPost", async: false, method: 'POST',
             data: JSON.stringify({
-                "title": $('#title').val(), 'content': $('#content').val()
-            }),
-            contentType: 'text/plain'
+                "title": $('#title').val(),
+                "content": $('#content').val()
+            })
             , success: function (response) {
                 if ((response.resultCode) == 200) {
 //js자체 object니 jqueryx
-                    window.location.href = urlNew;
+                    window.location.href = urlboardPost;
                 } else {
                     alert(" login not verifed" + response.resultCode);
                 }

@@ -48,13 +48,6 @@
         where id = #{id}
     </select>
 
-<!--    <insert id="createComment">-->
-<!--        insert into tb_board(-->
-<!--        id,parent_id,grpNum,grpOrd,depth,title,content,email-->
-<!--        ) select-->
-<!--            id,parent_id,-->
-<!--        from tb_board-->
-<!--    </insert>-->
     <insert id="createComment">
           INSERT INTO tb_board (
             parent_id
@@ -65,16 +58,17 @@
             , content
             , createdAt
             , email
-        )   SELECT
-            #{pare} AS parent_id
-            , ifnull(MAX(grpNum),0) + 1 AS grpNum
-            , #{grpOrd} AS grpOrd
-            , 0 as depth
-            , #{title} as title
-            , #{content} as content
-            , NOW() AS createdAt
-            , #{email} AS email
-        FROM tb_board
+        )  SELECT
+
+              #(id) AS parent_id
+                , ifnull(MAX(grpNum),0) + 1 AS grpNum
+                , 0 AS grpOrd
+                , 0 as depth
+                , #{title} as title
+                , #{content} as content
+                , NOW() AS createdAt
+                , #{email} AS email
+          FROM tb_board
 
     </insert>
 </mapper>

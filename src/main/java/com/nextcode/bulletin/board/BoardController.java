@@ -84,14 +84,18 @@ public class BoardController {
         UserVO userVO = getSession(request);
 
         log.info("this is subPost");
-
         ModelMap map = new ModelMap();
+
         if (boardVO.getTitle() == null && boardVO.getContent() == null) {
             map.addAttribute("resultCode", 400);
             return map;
         }
+
+
         map.addAttribute("resultCode", 200);
+
         boardVO.setEmail(userVO.getEmail());
+
         boardService.postComment(boardVO);
         return map;
     }

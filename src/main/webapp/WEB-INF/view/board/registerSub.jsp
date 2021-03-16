@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     답글쓰기 페이지
 </head>
 <body>
@@ -24,21 +23,23 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
         crossorigin="anonymous"></script>
 <script>
-    var urlboardPost = "boardList"
-
-    var t = document.getElementById('registerReplyButton')
-    t.addEventListener('click', function (event) {
+    var urlSubBoardPost = "boardList"
+    console.log(request.getParameter("id"))
+    var registerReplyButton = document.getElementById('registerReplyButton')
+    registerReplyButton.addEventListener('click', function (event) {
         var request = $.ajax({
             url: "subPost",
             async: false,
             method: 'POST',
             data: JSON.stringify({
-                "title": $('#title').val(), 'content': $('#content').val()
+               "parent_id":request.getParameter("id"),
+               "title": $('#title').val(),
+               "content": $('#content').val()
             }),
             success: function (response) {
                 if ((response.resultCode) == 200) {
 //js자체 object니 jqueryx
-                    window.location.href = urlNew;
+                    window.location.href = urlSubBoardPost;
                 } else {
                     alert(" login not verifed" + response.resultCode);
                 }
@@ -48,5 +49,7 @@
             dataType: "json",
         })
     })
+
+
 </script>
 </html>
