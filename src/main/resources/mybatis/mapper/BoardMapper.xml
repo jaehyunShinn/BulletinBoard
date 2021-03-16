@@ -24,8 +24,6 @@
             , #{email} AS email
         FROM tb_board
     </insert>
-
-
     <!--
      <where>
             <if test="@org.apache.common.lang3.StringUtils@isNotEmpty(title)">
@@ -50,25 +48,24 @@
 
     <insert id="createComment">
           INSERT INTO tb_board (
-            parent_id
-            , grpNum
-            , grpOrd
-            , depth
-            , title
-            , content
-            , createdAt
-            , email
-        )  SELECT
-
-              #(id) AS parent_id
-                , ifnull(MAX(grpNum),0) + 1 AS grpNum
-                , 0 AS grpOrd
-                , 0 as depth
-                , #{title} as title
-                , #{content} as content
-                , NOW() AS createdAt
-                , #{email} AS email
-          FROM tb_board
-
+             parent_id
+           , grpNum
+           , grpOrd
+           , depth
+           , title
+           , content
+           , createdAt
+           , email
+        ) SELECT
+-- //reqeust.getParameter로 id값 넘겼음
+            #{id} AS parent_id
+            , #{grpNum} as grpNum
+            , #{grpOrd}+1 as grpOrd
+            , #{depth}+1 as depth
+            , #{title} as title
+           , #{content} as content
+           , NOW() AS createdAt
+           , #{email} AS email
+            FROM tb_board
     </insert>
 </mapper>

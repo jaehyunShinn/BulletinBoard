@@ -37,7 +37,9 @@ public class BoardService {
     }
 
     public void postComment(BoardVO boardDetail) {
-
+        BoardForm boardForm = new BoardForm();
+        boardForm.setId(boardDetail.getId());
+        boardDetail=boardMapper.getBoardDetail(boardForm);
         boardMapper.createComment(boardDetail);
     }
 

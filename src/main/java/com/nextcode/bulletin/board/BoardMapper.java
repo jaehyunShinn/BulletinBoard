@@ -14,4 +14,5 @@ public interface BoardMapper {
      List<BoardVO> getBoardList();
      BoardVO getBoardDetail(BoardForm form);
      void createComment(BoardVO boardVO);
+
 }

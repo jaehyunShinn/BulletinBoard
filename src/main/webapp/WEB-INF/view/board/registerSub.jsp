@@ -24,21 +24,19 @@
         crossorigin="anonymous"></script>
 <script>
     var urlSubBoardPost = "boardList"
-    console.log(request.getParameter("id"))
     var registerReplyButton = document.getElementById('registerReplyButton')
     registerReplyButton.addEventListener('click', function (event) {
         var request = $.ajax({
-            url: "subPost",
+            url: "/board/subPost",
             async: false,
             method: 'POST',
             data: JSON.stringify({
-               "parent_id":request.getParameter("id"),
+               "parent_id":${param.id},
                "title": $('#title').val(),
                "content": $('#content').val()
             }),
             success: function (response) {
                 if ((response.resultCode) == 200) {
-//js자체 object니 jqueryx
                     window.location.href = urlSubBoardPost;
                 } else {
                     alert(" login not verifed" + response.resultCode);
@@ -49,7 +47,6 @@
             dataType: "json",
         })
     })
-
 
 </script>
 </html>

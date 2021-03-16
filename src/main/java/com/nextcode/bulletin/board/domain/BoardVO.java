@@ -3,7 +3,7 @@ package com.nextcode.bulletin.board.domain;
 import java.io.Serializable;
 
 public class BoardVO {
-    private int id;
+    private String id;
     private int parent_id;
     private int grpNum;
     private int grpOrd;
@@ -22,11 +22,11 @@ public class BoardVO {
         this.email = email;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
