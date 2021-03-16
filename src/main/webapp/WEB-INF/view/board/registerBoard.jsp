@@ -11,7 +11,7 @@
 <body>
     <form action="boardPost" method="post">
         <h1>Login</h1>
-        <input type="text" placeholder="Title" required="" id="title" name="title"
+        <input type="text" placeholder="Title" required="" id="title" name="title" maxlength="20"
                style="width:700px;height:100px;font-size:20px;"/>
         </br>
         <input type="text" placeholder="Content" required="" id="content" name="content"
@@ -28,24 +28,30 @@
 
     var t = document.getElementById('registerArticleButton')
     t.addEventListener('click', function (event) {
-        alert('글 작성됨')
         var request = $.ajax({
             url: "/board/boardPost", async: false, method: 'POST',
             data: JSON.stringify({
                 "title": $('#title').val(),
                 "content": $('#content').val()
-            })
-            , success: function (response) {
+            }),
+            success: function (response) {
                 if ((response.resultCode) == 200) {
 //js자체 object니 jqueryx
                     window.location.href = urlboardPost;
                 } else {
-                    alert(" login not verifed" + response.resultCode);
+                    if(!response.resultMsg){
+                        alert("글 등록 시 애러가 발생하였습니다.");
+                    }else {
+                        alert(response.resultMsg);
+                    }
                 }
                 console.log(response);
-            }
-            , contentType: "application/json; charset=utf-8"
-            , dataType: "json"
+            },
+            error: function (response) {
+                alert('글 등록시 에러가 발생하였습니다.');
+            },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
         })
     })
 </script>

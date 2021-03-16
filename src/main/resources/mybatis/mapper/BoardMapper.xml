@@ -37,7 +37,7 @@
     <select id="getBoardList" resultType="com.nextcode.bulletin.board.domain.BoardVO">
         SELECT id,parent_id,grpNum,grpOrd,depth,title,content,email
         FROM tb_board
-        ORDER BY grpNum ASC, grpOrd ASC
+        ORDER BY grpNum DESC, grpOrd ASC
     </select>
 
     <select id="getBoardDetail" resultType="com.nextcode.bulletin.board.domain.BoardVO">
@@ -56,16 +56,23 @@
            , content
            , createdAt
            , email
-        ) SELECT
--- //reqeust.getParameter로 id값 넘겼음
-            #{id} AS parent_id
-            , #{grpNum} as grpNum
-            , #{grpOrd}+1 as grpOrd
-            , #{depth}+1 as depth
-            , #{title} as title
-           , #{content} as content
-           , NOW() AS createdAt
-           , #{email} AS email
-            FROM tb_board
+        ) values (
+            #{parent_id}
+            , #{grpNum}
+            , #{grpOrd}
+            , #{depth}
+            , #{title}
+           , #{content}
+           , NOW()
+           , #{email}
+        )
     </insert>
+
+    <update id="updateChildGroupOrder">
+        /** 부모글과 그룹번호 같고, 부모글의 그룹내순서보다 큰 순서를 가진 데이터의 그룹번호를 1식 증가 */
+        UPDATE TB_BOARD SET
+            grpOrd = grpOrd + 1
+        WHERE grpNum = #{grpNum}
+        AND grpOrd > #{grpOrd}
+    </update>
 </mapper>

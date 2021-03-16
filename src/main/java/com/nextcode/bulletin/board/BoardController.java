@@ -17,6 +17,12 @@ import javax.activation.CommandMap;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * BoardInterceptor를 만들어서 세션검사를 해아 한다.
+ * 반복 코드가 들어가 있음
+ *
+ *
+ */
 @Controller
 @RequestMapping("/board")
 public class BoardController {
@@ -31,16 +37,18 @@ public class BoardController {
 //        BoardVO boardVO = convertFormToVO(boardForm);
         UserVO userVO = getSession(request);
         ModelMap map = new ModelMap();
-        if (boardVO.getTitle() == null && boardVO.getContent() == null) {
-            map.addAttribute("resultCode", 400);
+
+        boardVO.setEmail(userVO.getEmail());
+        try {
+            boardService.postArticle(boardVO);
+        }catch (Exception e){
+            map.addAttribute("resultCode", 500);
+            map.addAttribute("resultMsg", e.getMessage());
+
             return map;
         }
 
         map.addAttribute("resultCode", 200);
-        //todo 글 작성 로직 처리
-        System.out.println("이메일 확인" + userVO.getEmail());
-        boardVO.setEmail(userVO.getEmail());
-        boardService.postArticle(boardVO);
         return map;
     }
 

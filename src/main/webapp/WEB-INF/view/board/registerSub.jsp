@@ -39,7 +39,11 @@
                 if ((response.resultCode) == 200) {
                     window.location.href = urlSubBoardPost;
                 } else {
-                    alert(" login not verifed" + response.resultCode);
+                    if(!response.resultMsg){
+                        alert("글 등록 시 애러가 발생하였습니다.");
+                    }else {
+                        alert(response.resultMsg);
+                    }
                 }
                 console.log(response);
             },
