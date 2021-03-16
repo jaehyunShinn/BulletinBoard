@@ -9,14 +9,12 @@
 </head>
 <body>
 <h1>Login</h1>
-<form action="registerComment" method="post">
+<form action="registerSub" method="post">
     <div type="text" placeholder="Title" required="" id="title" name="title"
          style="width:700px;height:100px;font-size:20px;"/>
     </br>
     <div type="text" placeholder="Content" required="" id="content" name="content"
          style="width:800px;height:500px;font-size:15px;"/>
-
-
     <div>
         <input type="button" id="registerCommentButton" value="답글등록">
     </div>
@@ -29,11 +27,11 @@
     var t = document.getElementById('registerCommentButton')
     t.addEventListener('click', function (event) {
         var request = $.ajax({
-            url: "/board/registerSub", async: false, method: 'POST',
-            data: JSON.stringify({}),
+            url: "/board/subPost", async: false, method: 'POST',
+            data: JSON.stringify({ }),
             success: function (response) {
                 if ((response.resultCode) == 200) {
-//js자체 object니 jqueryx
+                    //js자체 object니 jqueryx
                     // window.location.href = urlNew ;
                 } else {
                     alert(" login not verifed" + response.resultCode);

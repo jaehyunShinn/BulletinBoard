@@ -60,25 +60,37 @@ public class BoardController {
         getSession(request);
     }
 
-    @RequestMapping(value = "/registerComment", method = {RequestMethod.POST})
-    private BoardVO convertFormToVO(BoardForm boardForm) {
-        return boardService.convertFormToVO(boardForm);
-    }
 
     //상세보기 페이지
-    @RequestMapping(value="/boardDetail",method = {RequestMethod.GET})
-    private void getBoardDetail(Model map,HttpServletRequest request,BoardForm form) {
+    @RequestMapping(value = "/boardDetail", method = {RequestMethod.GET})
+    private void getBoardDetail(Model map, HttpServletRequest request, BoardForm form) {
         getSession(request);
         BoardVO boardDetail = boardService.getBoardDetail(form);
-        map.addAttribute("boardDetail",boardDetail);
+        map.addAttribute("boardDetail", boardDetail);
     }
-    @RequestMapping(value="/registerComment", method= {RequestMethod.POST})
-    private void registerComment(HttpServletRequest request, BoardForm form) {
+
+    @RequestMapping(value = "/registerSub", method = {RequestMethod.POST})
+    private void registerSub(HttpServletRequest request, BoardForm form) {
         //resultcode만 보내면 돼
         getSession(request);
-        ModelMap modelMap= new ModelMap();
-        BoardVO boardDetail =  boardService.getBoardDetail(form);
-        modelMap.addAttribute("boardDetailinComment",boardDetail);
+        ModelMap modelMap = new ModelMap();
+        BoardVO boardDetail = boardService.getBoardDetail(form);
+        modelMap.addAttribute("boardDetailinComment", boardDetail);
         boardService.postComment(boardDetail);
     }
+    @ResponseBody
+    @RequestMapping(value = "/subPost",method={RequestMethod.POST})
+    public ModelMap subPost(@RequestBody BoardVO boardVO, HttpServletRequest request) {
+            UserVO userVO = getSession(request);
+            ModelMap map = new ModelMap();
+            if (boardVO.getTitle() == null && boardVO.getContent() == null) {
+                map.addAttribute("resultCode", 400);
+                return map;
+            }
+        map.addAttribute("resultCode", 200);
+        boardVO.setEmail(userVO.getEmail());
+        boardService.postComment(boardVO);
+        return map;
+    }
+
 }

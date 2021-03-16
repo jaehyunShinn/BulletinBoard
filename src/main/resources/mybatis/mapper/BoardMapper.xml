@@ -41,21 +41,7 @@
         FROM tb_board
 --         /RDER BY grpNum ASC, grpOrd ASC
     </select>
-<!--안쓸 것 같지만 일단 남겨두기-->
-    <select id="convertFormToVO" resultType="com.nextcode.bulletin.board.domain.BoardVO">
 
-            SELECT id,parent_id,grpNum,grpOrd,depth,title,content
-            FROM tb_board
-            <where>
-                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(title)">
-                    AND title =#{title}
-                </if>
-
-                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(content)">
-                    AND content = #{content}
-                </if>
-            </where>
-    </select>
     <select id="getBoardDetail" resultType="com.nextcode.bulletin.board.domain.BoardVO">
         select id,parent_id,grpNum,grpOrd,depth,title,content
         from tb_board
@@ -65,14 +51,9 @@
 <!--    <insert id="createComment">-->
 <!--        insert into tb_board(-->
 <!--        id,parent_id,grpNum,grpOrd,depth,title,content,email-->
-
 <!--        ) select-->
-
 <!--            id,parent_id,-->
-
-
 <!--        from tb_board-->
-
 <!--    </insert>-->
     <insert id="createComment">
           INSERT INTO tb_board (
@@ -85,7 +66,7 @@
             , createdAt
             , email
         )   SELECT
-            0 AS parent_id
+            #{pare} AS parent_id
             , ifnull(MAX(grpNum),0) + 1 AS grpNum
             , #{grpOrd} AS grpOrd
             , 0 as depth

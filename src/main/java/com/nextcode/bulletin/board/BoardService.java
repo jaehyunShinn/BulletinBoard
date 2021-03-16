@@ -28,18 +28,18 @@ public class BoardService {
         return boardMapper.getBoardList();
     }
 
-    public BoardVO convertFormToVO(BoardForm boardForm) {
-
-        return boardMapper.convertFormToVO(boardForm);
-    }
 
     public BoardVO getBoardDetail(BoardForm form) {
-        System.out.println("form="+form.toString());
+        System.out.println("form=" + form.toString());
         BoardVO dto = boardMapper.getBoardDetail(form);
-        System.out.println("dto="+dto.toString());
+        System.out.println("dto=" + dto.toString());
         return dto;
     }
+
     public void postComment(BoardVO boardDetail) {
+
         boardMapper.createComment(boardDetail);
     }
+
+
 }
